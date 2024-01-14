@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import Board from "./Board";
 import GameOver from "./GameOver.jsx";
 import GameState from "./GameState.js";
+import Reset from "./Reset.jsx";	
 const PLAYER_X = "x";	
 const PLAYER_O = "o";
 const WINNING_COMBINATIONS = [
@@ -32,9 +33,14 @@ function checkWinner(tiles,strikeClass,setStrikeClass ,setGameState){
                 setGameState(GameState.playerOWins);
             
             }
+            return;
         
     }
 
+}
+const areAllTilesFilled = tiles.every((tile)=> tile !== null);
+if(areAllTilesFilled){
+    setGameState(GameState.draw);
 }
 }
 function TicTacToe(){
@@ -43,7 +49,11 @@ function TicTacToe(){
     const [strikeClass, setStrikeClass] = useState(Array(9).fill(""));
     const[gameState, setGameState] = useState(GameState.inProgress);
     useEffect(()=>{checkWinner(tiles,strikeClass,setStrikeClass,setGameState)},[tiles]);
+    
     const handleTileClick = (index)=>{
+        if (gameState!== GameState.inProgress){
+            return;
+        }
         if(tiles[index]!== null){
             return;
         }
@@ -57,13 +67,22 @@ function TicTacToe(){
             setPlayerTurn(PLAYER_X);
         }
     }
+    const handleReset = ()=>{
+        console.log("reset");
+        setGameState(GameState.inProgress);
+        setPlayerTurn(PLAYER_X);
+        setTiles(Array(9).fill(null));
+        setStrikeClass(Array(9).fill(""));
+      
+    }
     return (
         <div>
             <h1>TicTacToe</h1>
             
                 <Board  playerTurn = {playerTurn} tiles = {tiles} onTileClick = {handleTileClick} strikeClass={strikeClass}/>
 
-                <div><GameOver gameState = {gameState}/></div>
+                <GameOver gameState = {gameState}/>
+                <Reset gameState={gameState} onReset = {handleReset} />
 
         
         </div>

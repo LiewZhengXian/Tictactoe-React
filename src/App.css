@@ -62,10 +62,39 @@ h1{
   color: rgb(71, 9, 14)
 }
 .game-over {
+  background: rgb(2,0,36);
+  background-image: linear-gradient(90deg,  rgb(99, 84, 0) 0%, rgb(167, 155, 0) 35%, gold 100%);
+
+
+  border:none;
+  color:rgb(0, 0, 0);
+  box-shadow: 5px 5px 8px rgb(0, 0, 0);
+  font-weight:bold;
   text-align: center;
-  border: #5468ff 8px;
-  border-style: dotted;
+  justify-content: center;
+  align-items: center;
+  
   padding: 10px;
   margin-top: 50px;
   font-size: 1.5em;
+}
+.reset-button{
+
+  background: rgb(2,0,36);
+  background-image: linear-gradient(90deg,  rgb(99, 84, 0) 0%, rgb(167, 155, 0) 35%, gold 100%);
+
+  border:none;
+  color:rgb(0, 0, 0);
+  box-shadow: 5px 5px 8px rgb(0, 0, 0);
+  font-weight:bold;
+  text-align: center;
+
+  padding: 20px;
+  margin-top: 50px;
+  font-size: 1.5em;
+}
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
